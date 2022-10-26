@@ -17,15 +17,15 @@ class Character:
     def __init__(self, name) -> None:
         self.name = name
 
-    def attack(self) -> str:
+    def attack(self):
         value_attack = DEFAULT_ATTACK + randint(*self.RANGE_VALUE_ATTACK)
         return (f'{self.name} нанёс противнику урон, равный {value_attack}')
 
-    def defence(self) -> str:
+    def defence(self):
         value_defence = DEFAULT_DEFENCE + randint(*self.RANGE_VALUE_DEFENCE)
         return (f'{self.name} блокировал {value_defence} ед. урона.')
 
-    def special(self) -> str:
+    def special(self):
         return (f'{self.name} применил специальное умение '
                 f'"{self.SPECIAL_SKILL} {self.SPECIAL_BUFF}".')
 
@@ -60,7 +60,7 @@ class Healer(Character):
     SPECIAL_SKILL = 'Защита'
 
 
-def start_training(character):
+def start_training(character: Character, char_name):
     """
     Принимает на вход имя и класс персонажа.
     Возвращает сообщения о результатах цикла тренировки персонажа.
@@ -106,7 +106,5 @@ if __name__ == '__main__':
     char_name: str = input('...назови себя: ')
     print(f'Здравствуй, {char_name}! '
           'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
-    print('Ты можешь выбрать один из трёх путей силы:')
-    print('Воитель, Маг, Лекарь')
-    char_class: str = choice_char_class()
-    print(start_training(char_name, char_class))
+    char_class: str = choice_char_class(char_name)
+    start_training(char_class, char_name)
